@@ -40,7 +40,6 @@ public class login extends javax.swing.JFrame {
         pword = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         uname = new javax.swing.JTextField();
-        update = new javax.swing.JButton();
         adduser = new javax.swing.JButton();
         login = new javax.swing.JButton();
 
@@ -59,16 +58,8 @@ public class login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setText("User Name");
 
-        update.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        update.setText("update");
-        update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateActionPerformed(evt);
-            }
-        });
-
         adduser.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        adduser.setText("new");
+        adduser.setText("new user");
         adduser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adduserActionPerformed(evt);
@@ -91,20 +82,22 @@ public class login extends javax.swing.JFrame {
                 .addGap(148, 148, 148)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(Password)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pword, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(adduser)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(Password))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(adduser)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(pword, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(96, 96, 96))))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(84, 84, 84)
@@ -121,16 +114,19 @@ public class login extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel1)
-                .addGap(82, 82, 82)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Password)
-                    .addComponent(pword, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
-                .addGap(57, 57, 57)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(update)
-                    .addComponent(adduser)
-                    .addComponent(login))
-                .addGap(50, 50, 50))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Password)
+                            .addComponent(pword, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                        .addGap(138, 138, 138))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(login)
+                            .addComponent(adduser))
+                        .addGap(41, 41, 41))))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(83, 83, 83)
@@ -173,7 +169,8 @@ public class login extends javax.swing.JFrame {
                 ResultSet rs = con.s.executeQuery(str);  
                 
                 if(rs.next()){
-                    home H = new home();
+                    home H = new home(usrname);
+//                    userhome H = new userhome();
                     setVisible(false);
                     H.setVisible(true);
                 }else{
@@ -195,37 +192,6 @@ public class login extends javax.swing.JFrame {
         
         n.setVisible(true);
     }//GEN-LAST:event_adduserActionPerformed
-
-    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-        
-        
-        connect con = new connect();
-        String usrname = uname.getText();
-        String psword = pword.getText();
-        
-        if(usrname.isEmpty() ||  psword.isEmpty())
-        {
-            JOptionPane.showMessageDialog(this, "UserName or Password Blank");
-        } else {
-            try {
-                String str = "select * from user where username = '"+usrname+"' and password = '"+psword+"'";
-                ResultSet rs = con.s.executeQuery(str);  
-                
-                if(rs.next()){
-                    updatePassword U = new updatePassword(usrname);
-                    setVisible(false);
-                    U.setVisible(true);
-                }else{
-                    JOptionPane.showMessageDialog(null,"Invalid Login");
-                    setVisible(false); 
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-        
-    }//GEN-LAST:event_updateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,6 +239,5 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JButton login;
     private javax.swing.JTextField pword;
     private javax.swing.JTextField uname;
-    private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }

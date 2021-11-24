@@ -5,6 +5,14 @@
  */
 package airline.newairlines;
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Vinee
@@ -16,7 +24,11 @@ public class passengerInfo extends javax.swing.JInternalFrame {
      */
     public passengerInfo() {
         initComponents();
+        LoadData();
     }
+    connect con = new connect();
+    connect con1 = new connect();
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,13 +44,10 @@ public class passengerInfo extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Passenger Id", "Name", "Phone Number", "Flight Id", "Seat", "Amount Due"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -68,4 +77,66 @@ public class passengerInfo extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+    
+        public void LoadData()
+    {
+        try {
+//             con = DriverManager.getConnection("jdbc:mysql://localhost/airline","root","");
+//             pst = con.prepareStatement("SELECT * from ticket");
+//                          pst = con.prepareStatement("SELECT * from ticket");
+            String str = "select * from ticket";
+            ResultSet rs = con.s.executeQuery(str);
+//             ResultSet rs = pst.executeQuery();
+             
+//             ResultSetMetaData rsm = rs.getMetaData();
+//             int c;
+//             c = rsm.getColumnCount();
+             
+             DefaultTableModel Df = (DefaultTableModel)jTable1.getModel();
+             Df.setRowCount(0);
+             
+             while(rs.next())
+             {  
+                String custid = rs.getString("cid");
+                String str1 = "select * from customer where id = '"+custid+"'";
+                ResultSet rs1 = con1.s.executeQuery(str1);
+                while(rs1.next()) {
+                    Vector v2 = new Vector();
+
+                    for(int i = 1; i<= 6; i ++)
+                    {
+                        v2.add(rs1.getString("id"));
+                        v2.add(rs1.getString("fname")+rs1.getString("lname"));
+                        v2.add(rs1.getString("phone"));
+                        v2.add(rs.getString("fid"));
+                        v2.add(rs.getString("seat num"));
+                        v2.add(rs.getString("price"));
+
+    //                    v2.add(rs.getString("date"));
+
+                    }
+
+                     Df.addRow(v2);
+                }
+              
+                 
+                 
+             }
+             
+             
+             
+             
+             
+             
+        } catch (SQLException ex) {
+            Logger.getLogger(bookTickets.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    }
+    
+
+
+
 }

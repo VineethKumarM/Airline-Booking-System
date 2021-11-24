@@ -5,6 +5,14 @@
  */
 package airline.newairlines;
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Vinee
@@ -16,8 +24,10 @@ public class allFlights extends javax.swing.JInternalFrame {
      */
     public allFlights() {
         initComponents();
+        LoadData();
     }
-
+    
+    connect con = new connect();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,24 +39,37 @@ public class allFlights extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Fliight Id", "", "Title 3", "Title 4"
+                "Fliight Id", "Flight Name", "Source", "Destination", "Capacity", "Seats Available", "Class"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        jButton1.setText("Close");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(358, 358, 358)
+                        .addComponent(jButton1)))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -54,15 +77,74 @@ public class allFlights extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+        public void LoadData(){
+            try {
+    //             con = DriverManager.getConnection("jdbc:mysql://localhost/airline","root","");
+    //             pst = con.prepareStatement("SELECT * from ticket");
+    //                          pst = con.prepareStatement("SELECT * from ticket");
+                String str = "select * from flights";
+                ResultSet rs = con.s.executeQuery(str);
+    //             ResultSet rs = pst.executeQuery();
+
+                 ResultSetMetaData rsm = rs.getMetaData();
+                 int c;
+                 c = rsm.getColumnCount();
+
+                 DefaultTableModel Df = (DefaultTableModel)jTable1.getModel();
+                 Df.setRowCount(0);
+
+                 while(rs.next())
+                 {
+                     Vector v2 = new Vector();
+
+                     for(int i = 1; i<= c; i ++)
+                     {
+                         v2.add(rs.getString("id"));
+                      v2.add(rs.getString("name"));
+                      v2.add(rs.getString("src"));
+                      v2.add(rs.getString("dst"));
+                      v2.add(rs.getString("total"));
+                      v2.add(rs.getString("available"));
+                      v2.add(rs.getString("class"));
+
+                     }
+
+                     Df.addRow(v2);
+
+
+
+
+                 }
+
+
+
+
+
+
+            } catch (SQLException ex) {
+                Logger.getLogger(bookTickets.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }    
+       
 }
