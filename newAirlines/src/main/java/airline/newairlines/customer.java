@@ -31,11 +31,16 @@ public class customer extends javax.swing.JFrame {
     /**
      * Creates new form customer
      */
-    public customer() {
+    int m;
+    public customer(int i) {
         initComponents();
         idGenerate();
+        m=i;
+        
     }
     connect con1 = new connect();
+        connect con2 = new connect();
+
     Connection con;
     PreparedStatement pst;
     String path=null;
@@ -282,9 +287,16 @@ public class customer extends javax.swing.JFrame {
             pst = con.prepareStatement("INSERT INTO customer values( '"+mid+"','"+firstname+"', '"+lastname+"', '"+adrs+"', '"+pass+"', '"+dob+"', '"+Gender+"', '"+contact+"',?)");
             pst.setBytes(1, userimage);
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Flight Added");
+            try {
+                String sr = "update user set cid = '"+mid+"' where id='"+m+"'";
+                int j = con2.s.executeUpdate(sr);
+                
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(null,"Registration Successful!");
             setVisible(false);
-
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -361,7 +373,7 @@ public class customer extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new customer().setVisible(true);
+                new customer(Integer.parseInt(args[0])).setVisible(true);
             }
         });
     }

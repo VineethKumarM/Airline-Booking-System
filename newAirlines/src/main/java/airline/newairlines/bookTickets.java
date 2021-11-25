@@ -19,13 +19,16 @@ import javax.swing.table.DefaultTableModel;
  * @author Vinee
  */
 public class bookTickets extends javax.swing.JInternalFrame {
-
+    int csid;
     /**
      * Creates new form bookTickets
+     * @param i
      */
-    public bookTickets() {
+    public bookTickets(int i) {
         initComponents();
         idGenerate();
+        csid = i;
+        showCustomer(csid);
     }
     connect con = new connect();
     connect con1 = new connect();
@@ -499,12 +502,12 @@ public class bookTickets extends javax.swing.JInternalFrame {
         cid = Integer.parseInt(id);
         
         try {
-            String str = "select * from customer where id = '"+id+"'";
+            String str = "select * from customer where id = '"+cid+"'";
             ResultSet rs = con.s.executeQuery(str);
             
             if(rs.next() == false)
             {
-                JOptionPane.showMessageDialog(this, "Record not Found");
+                JOptionPane.showMessageDialog(this, "Record not Found, Please make Passenger Registration");
             }
             else
             {
@@ -580,4 +583,36 @@ public class bookTickets extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> src;
     private javax.swing.JLabel tckt;
     // End of variables declaration//GEN-END:variables
+
+    private void showCustomer(int i) {
+        try {
+            String str = "select * from customer where id = '"+i+"'";
+            ResultSet rs = con.s.executeQuery(str);
+            
+            if(rs.next() == false)
+            {
+                JOptionPane.showMessageDialog(this, "Record not Found");
+            }
+            else
+            {
+                 String fname = rs.getString("fname");
+                 String lname = rs.getString("lname");
+               
+                 String pssport = rs.getString("passport");
+        
+                 
+                 fn.setText(fname.trim());
+                 ln.setText(lname.trim());
+               
+                  passp.setText(pssport.trim());
+
+
+            
+        }
+            } catch (SQLException ex) {
+            Logger.getLogger(bookTickets.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    
+    }
 }

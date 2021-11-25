@@ -241,9 +241,10 @@ public class newuser extends javax.swing.JFrame {
         String lastname = lname.getText();
         String usrname = username.getText();
         String psword = password.getText();
+        int max = Integer.MAX_VALUE;
 
         try {
-            String str = "INSERT INTO user values( '"+mid+"','"+firstname+"', '"+lastname+"', '"+usrname+"', '"+psword+"')";
+            String str = "INSERT INTO user values( '"+mid+"','"+firstname+"', '"+lastname+"', '"+usrname+"', '"+psword+"', '"+max+"')";
             con.s.executeUpdate(str);
             JOptionPane.showMessageDialog(null,"Customer Added");
             setVisible(false);

@@ -179,10 +179,20 @@ public class login extends javax.swing.JFrame {
                 ResultSet rs = con.s.executeQuery(str);  
                 
                 if(rs.next()){
-                    home H = new home(usrname);
-//                    userhome H = new userhome();
+                    if(Integer.parseInt(rs.getString("id")) == 0) {
+                        System.out.println("Integer.MAX_VALUE = ");
+                        home H = new home(usrname);
+                        H.setVisible(true);
+                    }
+                    else {
+                        System.out.println("_VALUE = ");
+                        userhome H = new userhome(usrname);
+                        H.setVisible(true);
+                    }
+                    
+//                    
                     setVisible(false);
-                    H.setVisible(true);
+                    
                 }else{
                     JOptionPane.showMessageDialog(null,"Invalid Login");
                     setVisible(false); 
