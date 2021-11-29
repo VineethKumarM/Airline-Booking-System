@@ -42,11 +42,11 @@ public class login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         Password = new javax.swing.JLabel();
-        pword = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         uname = new javax.swing.JTextField();
         adduser = new javax.swing.JButton();
         login = new javax.swing.JButton();
+        pword = new javax.swing.JPasswordField();
 
         jButton1.setText("jButton1");
 
@@ -68,8 +68,6 @@ public class login extends javax.swing.JFrame {
         Password.setText("Password");
         jPanel1.add(Password);
         Password.setBounds(86, 137, 95, 22);
-        jPanel1.add(pword);
-        pword.setBounds(222, 140, 124, 20);
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 102));
@@ -77,7 +75,7 @@ public class login extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(84, 83, 91, 22);
         jPanel1.add(uname);
-        uname.setBounds(222, 83, 124, 22);
+        uname.setBounds(220, 80, 124, 22);
 
         adduser.setBackground(new java.awt.Color(153, 153, 255));
         adduser.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -102,12 +100,16 @@ public class login extends javax.swing.JFrame {
         });
         jPanel1.add(login);
         login.setBounds(249, 227, 71, 31);
+        jPanel1.add(pword);
+        pword.setBounds(220, 140, 124, 22);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,6 +124,7 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
         connect con = new connect();
         String usrname = uname.getText();
+//        String psword = pword.getText();
         String psword = pword.getText();
         
         if(usrname.isEmpty() ||  psword.isEmpty())
@@ -137,6 +140,7 @@ public class login extends javax.swing.JFrame {
                         System.out.println("Integer.MAX_VALUE = ");
                         home H = new home(usrname);
                         H.setVisible(true);
+                            
                     }
                     else {
                         System.out.println("_VALUE = ");
@@ -211,7 +215,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton login;
-    private javax.swing.JTextField pword;
+    private javax.swing.JPasswordField pword;
     private javax.swing.JTextField uname;
     // End of variables declaration//GEN-END:variables
 }

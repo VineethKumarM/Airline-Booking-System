@@ -45,6 +45,7 @@ public class home extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(home.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
 //        setUser();
 //        this.setContentPane(new JPanel() {
 //         @Override
@@ -89,7 +90,6 @@ public class home extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1366, 805));
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 204, 204));
         jDesktopPane1.setPreferredSize(new java.awt.Dimension(1500, 768));
@@ -215,13 +215,23 @@ public class home extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+//        allTickets a = new allTickets();
+//        jDesktopPane1.add(a);
+//        a.setVisible(true);
+          customer cus = new customer(uid);
+        jDesktopPane1.add(cus);
+        cus.setVisible(true);
+    }  
+    
+    
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         allTickets a = new allTickets();
         jDesktopPane1.add(a);
