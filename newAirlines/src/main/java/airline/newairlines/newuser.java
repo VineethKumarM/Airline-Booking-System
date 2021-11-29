@@ -245,6 +245,8 @@ public class newuser extends javax.swing.JFrame {
 
         try {
             String str = "INSERT INTO user values( '"+mid+"','"+firstname+"', '"+lastname+"', '"+usrname+"', '"+psword+"', '"+max+"')";
+//                        String str = "INSERT INTO user values( '"+mid+"','"+firstname+"', '"+lastname+"', '"+usrname+"', '"+psword+"')";
+
             con.s.executeUpdate(str);
             JOptionPane.showMessageDialog(null,"Customer Added");
             setVisible(false);

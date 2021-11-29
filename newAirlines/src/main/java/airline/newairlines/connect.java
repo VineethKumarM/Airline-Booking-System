@@ -17,7 +17,8 @@ public class connect {
     PreparedStatement pst;
     public connect() {
         try {
-            c = DriverManager.getConnection("jdbc:mysql:///newairlines","sample","");
+//            c = DriverManager.getConnection("jdbc:mysql:///newairlines","sample","");
+            c = DriverManager.getConnection("jdbc:mysql:///newairlines","root","");
             s =c.createStatement(); 
          
         }catch(SQLException e){ 
